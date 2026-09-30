@@ -1,27 +1,21 @@
-part of flutter_cupertino_settings;
+part of '../flutter_cupertino_settings.dart';
 
-class CSSpacer extends StatelessWidget {
-  final BorderSide? bottomBorder;
+class const CSSpacer({
+  super.key,
+  final BorderSide? bottomBorder,
 
   /// Default: CupertinoColors.systemGroupedBackground
-  final Color? backgroundColor;
-
-  const CSSpacer({
-    super.key,
-    this.bottomBorder,
-    this.backgroundColor,
-  });
-
+  final Color? backgroundColor,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(left: 10.0, top: 20.0, bottom: 5.0),
       decoration: BoxDecoration(
-        color: backgroundColor ??
+        color:
+            backgroundColor ??
             CupertinoColors.systemGroupedBackground.resolveFrom(context),
-        border: Border(
-          bottom: bottomBorder ?? kCupertinoBorderSide(context),
-        ),
+        border: Border(bottom: bottomBorder ?? kCupertinoBorderSide(context)),
       ),
     );
   }

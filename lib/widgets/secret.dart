@@ -1,24 +1,17 @@
-part of flutter_cupertino_settings;
+part of '../flutter_cupertino_settings.dart';
 
 /// Provides a button for navigation
-class CSSecret extends StatefulWidget {
-  final String text;
-  final String secret;
-  final double fontSize;
-  final CSWidgetStyle? style;
-
-  const CSSecret(
-    this.text,
-    this.secret, {
-    this.style,
-    this.fontSize = kCSTitleFontsize,
-  });
-
+class const CSSecret(
+  final String text,
+  final String secret, {
+  final CSWidgetStyle? style,
+  final double fontSize = kCSTitleFontsize,
+}) extends StatefulWidget {
   @override
   _CSSecretState createState() => _CSSecretState();
 }
 
-class _CSSecretState extends State<CSSecret> {
+class _CSSecretState() extends State<CSSecret> {
   bool _show = false;
 
   @override
@@ -35,14 +28,10 @@ class _CSSecretState extends State<CSSecret> {
             Text(widget.text),
             Row(
               children: <Widget>[
-                Text(
-                  _show ? widget.secret : '•' * widget.secret.length,
-                ),
+                Text(_show ? widget.secret : '•' * widget.secret.length),
                 CupertinoButton(
                   onPressed: () => setState(() => _show = !_show),
-                  child: const Icon(
-                    CupertinoIcons.eye_solid,
-                  ),
+                  child: const Icon(CupertinoIcons.eye_solid),
                 ),
               ],
             ),

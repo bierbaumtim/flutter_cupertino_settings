@@ -1,21 +1,16 @@
-part of flutter_cupertino_settings;
+part of '../flutter_cupertino_settings.dart';
 
-class CSDescription extends StatelessWidget {
-  final String description;
-  final Color? backgroundColor;
-  final TextStyle? style;
-
-  const CSDescription(
-    this.description, {
-    this.backgroundColor,
-    this.style,
-  });
-
+class const CSDescription(
+  final String description, {
+  final Color? backgroundColor,
+  final TextStyle? style,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(10, 7.5, 5, 5),
-      color: backgroundColor ??
+      color:
+          backgroundColor ??
           CupertinoColors.systemGroupedBackground.resolveFrom(context),
       child: Text(
         description,

@@ -1,20 +1,14 @@
-part of flutter_cupertino_settings;
+part of '../flutter_cupertino_settings.dart';
 
 /// Used to display a widget of any kind in [CupertinoSettings]
 /// It provices the correct height, color and border to create the intended look
 /// The optional [alignment] attribute allows to specify the aligment inside the container
 /// The optional [style] attribute allows to specify a style (e.g. an Icon)
-class CSWidget extends StatelessWidget {
-  final CSWidgetStyle? style;
-  final double height;
-  final Widget widget;
-
-  const CSWidget(
-    this.widget, {
-    this.height = kCSItemHeight,
-    this.style,
-  });
-
+class const CSWidget(
+  final Widget widget, {
+  final double height = kCSItemHeight,
+  final CSWidgetStyle? style,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final defaultCSWidgetTheme = DefaultCSWidgetTheme.of(context);
@@ -28,10 +22,7 @@ class CSWidget extends StatelessWidget {
       padding = kCSIconPadding;
       child = Row(
         children: <Widget>[
-          Container(
-            padding: kCSIconPadding,
-            child: effectiveWidgetStyle.icon,
-          ),
+          Container(padding: kCSIconPadding, child: effectiveWidgetStyle.icon),
           Expanded(child: widget),
         ],
       );
@@ -41,9 +32,7 @@ class CSWidget extends StatelessWidget {
       alignment: effectiveWidgetStyle.alignment,
       decoration: BoxDecoration(
         color: effectiveWidgetStyle.backgroundColor,
-        border: Border(
-          top: effectiveWidgetStyle.topBorder,
-        ),
+        border: Border(top: effectiveWidgetStyle.topBorder),
       ),
       constraints: const BoxConstraints(minHeight: 42),
       padding: EdgeInsets.only(

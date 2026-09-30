@@ -1,41 +1,31 @@
-part of flutter_cupertino_settings;
+part of '../flutter_cupertino_settings.dart';
 
 /// Provides a button for navigation
-class CSLink extends StatelessWidget {
+class const CSLink({
+  required final String title,
+  final VoidCallback? onPressed,
+  final String? subtitle,
+  final String? detail,
+  final CSWidgetStyle? style,
+
   /// The fontsize for the `title`.
-  final double titleFontSize;
+  final double titleFontSize = kCSTitleFontsize,
 
   /// The fontsize for the `subtitle`.
-  final double subTitleFontSize;
-  final String title;
-  final String? subtitle;
-  final String? detail;
-  final Widget? trailing;
-  final VoidCallback? onPressed;
-  final CSWidgetStyle? style;
-  final CellType cellType;
-  final int subtitleMaxLines;
-
-  const CSLink({
-    required this.title,
-    this.onPressed,
-    this.subtitle,
-    this.detail,
-    this.style,
-    this.titleFontSize = kCSTitleFontsize,
-    this.subTitleFontSize = kCSSubtitleFontsize,
-    this.trailing,
-    this.cellType = CellType.defaultStyle,
-    this.subtitleMaxLines = 1,
-  });
-
+  final double subTitleFontSize = kCSSubtitleFontsize,
+  final Widget? trailing,
+  final CellType cellType = CellType.defaultStyle,
+  final int subtitleMaxLines = 1,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final showSubtitle = (cellType == CellType.subtitleDetailStyle ||
+    final showSubtitle =
+        (cellType == CellType.subtitleDetailStyle ||
             cellType == CellType.subtitleStyle) &&
         subtitle != null &&
         subtitle!.isNotEmpty;
-    final showDetail = (cellType == CellType.subtitleDetailStyle ||
+    final showDetail =
+        (cellType == CellType.subtitleDetailStyle ||
             cellType == CellType.detailRightStyle) &&
         detail != null &&
         detail!.isNotEmpty;
@@ -57,11 +47,11 @@ class CSLink extends StatelessWidget {
                     title,
                     style: showSubtitle
                         ? CupertinoTheme.of(context).textTheme.textStyle.merge(
-                              const TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                              ),
-                            )
+                            const TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                            ),
+                          )
                         : CupertinoTheme.of(context).textTheme.textStyle,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -70,14 +60,15 @@ class CSLink extends StatelessWidget {
                     const SizedBox(height: 2),
                     Text(
                       subtitle!,
-                      style:
-                          CupertinoTheme.of(context).textTheme.textStyle.merge(
-                                TextStyle(
-                                  fontSize: 14,
-                                  color: CupertinoColors.secondaryLabel
-                                      .resolveFrom(context),
-                                ),
+                      style: CupertinoTheme.of(context).textTheme.textStyle
+                          .merge(
+                            TextStyle(
+                              fontSize: 14,
+                              color: CupertinoColors.secondaryLabel.resolveFrom(
+                                context,
                               ),
+                            ),
+                          ),
                       maxLines: subtitleMaxLines,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -89,11 +80,10 @@ class CSLink extends StatelessWidget {
               Text(
                 detail!,
                 style: CupertinoTheme.of(context).textTheme.textStyle.merge(
-                      TextStyle(
-                        color:
-                            CupertinoColors.secondaryLabel.resolveFrom(context),
-                      ),
-                    ),
+                  TextStyle(
+                    color: CupertinoColors.secondaryLabel.resolveFrom(context),
+                  ),
+                ),
                 maxLines: 1,
                 overflow: TextOverflow.clip,
               ),

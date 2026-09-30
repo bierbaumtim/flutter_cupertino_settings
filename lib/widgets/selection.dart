@@ -1,4 +1,4 @@
-part of flutter_cupertino_settings;
+part of '../flutter_cupertino_settings.dart';
 
 /// A selection view
 /// Allows to select between multiple items
@@ -12,23 +12,16 @@ part of flutter_cupertino_settings;
 ///
 /// onSelected(1)
 
-class CSSelection<T> extends StatelessWidget {
-  final List<CSSelectionItem<T>> items;
+class const CSSelection<T>({
+  required final List<CSSelectionItem<T>> items,
 
   /// The callback that is called, when a selections is tapped.
-  final void Function(T selected) onSelected;
-  final T currentSelection;
+  required final void Function(T selected) onSelected,
+  required final T currentSelection,
 
   /// The fontsize applied to each selection item text.
-  final double fontSize;
-
-  const CSSelection({
-    required this.items,
-    required this.onSelected,
-    required this.currentSelection,
-    this.fontSize = kCSTitleFontsize,
-  });
-
+  final double fontSize = kCSTitleFontsize,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -78,16 +71,11 @@ class CSSelection<T> extends StatelessWidget {
   }
 }
 
-class CSSelectionItem<T> {
-  final T value;
-  final String text;
-  final BorderSide? topBorder;
-  final BorderSide? bottomBorder;
-
-  const CSSelectionItem({
-    required this.value,
-    required this.text,
-    this.topBorder,
-    this.bottomBorder,
-  }) : assert(value != null);
+class const CSSelectionItem<T>({
+  required final T value,
+  required final String text,
+  final BorderSide? topBorder,
+  final BorderSide? bottomBorder,
+}) {
+  this : assert(value != null);
 }

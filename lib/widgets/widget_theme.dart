@@ -1,10 +1,10 @@
-part of flutter_cupertino_settings;
+part of '../flutter_cupertino_settings.dart';
 
 class DefaultCSWidgetTheme extends InheritedTheme {
   final CSWidgetStyle style;
   final double height;
 
-  const DefaultCSWidgetTheme({
+  const new({
     super.key,
     this.height = kCSItemHeight,
     required this.style,
@@ -17,12 +17,10 @@ class DefaultCSWidgetTheme extends InheritedTheme {
   ///
   /// This constructor creates a [DefaultCSWidgetTheme] that lacks a [child],
   /// which means the constructed value cannot be incorporated into the tree.
-  DefaultCSWidgetTheme.fallback({super.key, required BuildContext context})
-      : height = kCSItemHeight,
-        style = CSWidgetStyle.fallback(context),
-        super(
-          child: const SizedBox(),
-        );
+  new fallback({super.key, required BuildContext context})
+    : height = kCSItemHeight,
+      style = CSWidgetStyle.fallback(context),
+      super(child: const SizedBox());
 
   /// The closest instance of this class that encloses the given context.
   ///
@@ -37,9 +35,7 @@ class DefaultCSWidgetTheme extends InheritedTheme {
   // ignore: prefer_constructors_over_static_methods
   static DefaultCSWidgetTheme of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<DefaultCSWidgetTheme>() ??
-        DefaultCSWidgetTheme.fallback(
-          context: context,
-        );
+        DefaultCSWidgetTheme.fallback(context: context);
   }
 
   static Widget merge({
@@ -66,26 +62,17 @@ class DefaultCSWidgetTheme extends InheritedTheme {
 
   @override
   Widget wrap(BuildContext context, Widget child) {
-    final defaultCSWidgetTheme =
-        context.findAncestorWidgetOfExactType<DefaultCSWidgetTheme>();
+    final defaultCSWidgetTheme = context
+        .findAncestorWidgetOfExactType<DefaultCSWidgetTheme>();
 
     return identical(this, defaultCSWidgetTheme)
         ? child
-        : DefaultCSWidgetTheme(
-            style: style,
-            child: child,
-          );
+        : DefaultCSWidgetTheme(style: style, child: child);
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(
-      ObjectFlagProperty(
-        'style',
-        style,
-        showName: true,
-      ),
-    );
+    properties.add(ObjectFlagProperty('style', style, showName: true));
   }
 }

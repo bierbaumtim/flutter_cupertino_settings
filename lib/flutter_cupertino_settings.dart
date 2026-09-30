@@ -1,4 +1,4 @@
-library flutter_cupertino_settings;
+library;
 
 import 'dart:io';
 
@@ -31,10 +31,7 @@ const double kCSSubtitleFontsize = 11.0;
 const double kCSHeaderFontsize = 14.0;
 const double kCSDescriptionFontsize = 13.0;
 const double kCSItemNameSize = 15.0;
-const EdgeInsets kCSIconPadding = EdgeInsets.only(
-  right: 10.0,
-  left: 4.0,
-);
+const EdgeInsets kCSIconPadding = EdgeInsets.only(right: 10.0, left: 4.0);
 
 /// Event for [CSSelection]
 typedef SelectionCallback = void Function(int selected);
@@ -50,33 +47,34 @@ TextStyle basicTextStyle(BuildContext context) {
 }
 
 BorderSide kCupertinoBorderSide(BuildContext context) => BorderSide(
-      color: CupertinoColors.opaqueSeparator.resolveFrom(context),
-      width: 1 / MediaQuery.of(context).devicePixelRatio,
-    );
+  color: CupertinoColors.opaqueSeparator.resolveFrom(context),
+  width: 1 / MediaQuery.of(context).devicePixelRatio,
+);
 
-class CupertinoSettings extends StatelessWidget {
-  final List<Widget> items;
-  final bool shrinkWrap;
-  final ScrollController? controller;
-  final ScrollPhysics? physics;
-  final bool? primary;
-  final EdgeInsetsGeometry? padding;
-  final bool reverse;
-  final Axis scrollDirection;
-
-  const CupertinoSettings({
-    required this.items,
-    this.shrinkWrap = false,
-    this.controller,
-    this.physics,
-    this.primary,
-    this.padding,
-    this.reverse = false,
-    this.scrollDirection = Axis.vertical,
-  });
-
+class const CupertinoSettings({
+  required final List<Widget> items,
+  final bool shrinkWrap = false,
+  final ScrollController? controller,
+  final ScrollPhysics? physics,
+  final bool? primary,
+  final EdgeInsetsGeometry? padding,
+  final bool reverse = false,
+  final Axis scrollDirection = Axis.vertical,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final list = ListView.builder(
+      controller: controller,
+      shrinkWrap: shrinkWrap,
+      itemCount: items.length,
+      itemBuilder: (context, index) => items[index],
+      padding: padding,
+      primary: primary,
+      physics: physics,
+      reverse: reverse,
+      scrollDirection: scrollDirection,
+    );
+
     return DefaultCSWidgetTheme(
       style: CSWidgetStyle.fallback(context),
       child: ColoredBox(
@@ -84,34 +82,8 @@ class CupertinoSettings extends StatelessWidget {
         child: SafeArea(
           bottom: false,
           child: shrinkWrap
-              ? ListView.builder(
-                  controller: controller,
-                  shrinkWrap: shrinkWrap,
-                  itemCount: items.length,
-                  itemBuilder: (context, index) => items[index],
-                  padding: padding,
-                  primary: primary,
-                  physics: physics,
-                  reverse: reverse,
-                  scrollDirection: scrollDirection,
-                )
-              : Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: ListView.builder(
-                        controller: controller,
-                        shrinkWrap: shrinkWrap,
-                        itemCount: items.length,
-                        itemBuilder: (context, index) => items[index],
-                        padding: padding,
-                        primary: primary,
-                        physics: physics,
-                        reverse: reverse,
-                        scrollDirection: scrollDirection,
-                      ),
-                    ),
-                  ],
-                ),
+              ? list
+              : Column(children: <Widget>[Expanded(child: list)]),
         ),
       ),
     );

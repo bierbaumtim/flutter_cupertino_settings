@@ -1,46 +1,37 @@
-part of flutter_cupertino_settings;
+part of '../flutter_cupertino_settings.dart';
 
 /// A title [name] in combination with any widget [contentWidget]
 /// extends [CSWidget]
 /// Provides the correct paddings and text properties
-class CSControl extends CSWidget {
+class CSControl({
   /// The widget displayed at the left side of the widget.
-  final Widget nameWidget;
+  required final Widget nameWidget,
 
   /// The widget displayed at the right side of the widget.
-  final Widget contentWidget;
+  required final Widget contentWidget,
+  CSWidgetStyle? style,
 
   /// The fontsize applied to the children.
-  final double fontSize;
-
-  CSControl({
-    required this.nameWidget,
-    required this.contentWidget,
-    CSWidgetStyle? style,
-    this.fontSize = kCSTitleFontsize,
-  }) : super(
-          _ControlWidget(
-            fontSize: fontSize,
-            contentWidget: contentWidget,
-            nameWidget: nameWidget,
-          ),
-          style: style,
-        );
+  final double fontSize = kCSTitleFontsize,
+}) extends CSWidget {
+  this
+    : super(
+        _ControlWidget(
+          fontSize: fontSize,
+          contentWidget: contentWidget,
+          nameWidget: nameWidget,
+        ),
+        style: style,
+      );
 }
 
-class _ControlWidget extends StatelessWidget {
-  final Widget nameWidget;
-  final Widget contentWidget;
-  final double fontSize;
-
-  const _ControlWidget({
-    // ignore: unused_element
-    super.key,
-    required this.fontSize,
-    required this.contentWidget,
-    required this.nameWidget,
-  });
-
+class const _ControlWidget({
+  // ignore: unused_element_parameter
+  super.key,
+  required final double fontSize,
+  required final Widget contentWidget,
+  required final Widget nameWidget,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTextStyle(
@@ -50,10 +41,7 @@ class _ControlWidget extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          nameWidget,
-          contentWidget,
-        ],
+        children: <Widget>[nameWidget, contentWidget],
       ),
     );
   }

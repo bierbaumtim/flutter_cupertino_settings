@@ -1,40 +1,30 @@
-part of flutter_cupertino_settings;
+part of '../flutter_cupertino_settings.dart';
 
-class CSSection extends StatelessWidget {
-  final List<Widget> items;
+class CSSection({
+  super.key,
+  required final List<Widget> items,
 
   /// A widget displayed above the items. Typically a `CSHeader`.
-  final Widget? header;
+  final Widget? header,
 
   /// A widget displayed below the items. Typically a `CSDescription`.
-  final Widget? description;
-  final EdgeInsets? padding;
+  final Widget? description,
+  final EdgeInsets? padding,
 
   /// The `BorderRadius` applied to the Container holding the items.
   ///
   /// Default: `BorderRadius.circular(10)`
-  final BorderRadius? borderRadius;
-
-  CSSection({
-    super.key,
-    required this.items,
-    this.header,
-    this.description,
-    this.padding,
-    this.borderRadius,
-  })  : assert(
-          items.isNotEmpty,
-          'Items can not be null or empty.',
-        );
+  final BorderRadius? borderRadius,
+}) extends StatelessWidget {
+  this : assert(items.isNotEmpty, 'Items can not be null or empty.');
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) => Padding(
-        padding: padding ??
-            EdgeInsets.symmetric(
-              horizontal: constraints.maxWidth * 0.1,
-            ),
+        padding:
+            padding ??
+            EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.1),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
@@ -56,9 +46,7 @@ class CSSection extends StatelessWidget {
                   if (items.length == 1) {
                     return DefaultCSWidgetTheme.merge(
                       child: e,
-                      style: const CSWidgetStyle(
-                        bottomBorder: BorderSide.none,
-                      ),
+                      style: const CSWidgetStyle(bottomBorder: BorderSide.none),
                     );
                   } else if (e == items.first) {
                     return DefaultCSWidgetTheme.merge(
@@ -68,9 +56,7 @@ class CSSection extends StatelessWidget {
                   } else if (e == items.last) {
                     return DefaultCSWidgetTheme.merge(
                       child: e,
-                      style: const CSWidgetStyle(
-                        bottomBorder: BorderSide.none,
-                      ),
+                      style: const CSWidgetStyle(bottomBorder: BorderSide.none),
                     );
                   } else {
                     return e;

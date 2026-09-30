@@ -1,40 +1,28 @@
-part of flutter_cupertino_settings;
+part of 'flutter_cupertino_settings.dart';
 
 /// Defines style attributes that can be applied to every [CSWidget]
 @immutable
-class CSWidgetStyle with Diagnosticable {
-  final Icon? icon;
-
-  final AlignmentGeometry? alignment;
+class const CSWidgetStyle({
+  final AlignmentGeometry? alignment,
 
   /// Default: false
-  final bool addPaddingToBorder;
+  final bool addPaddingToBorder = true,
 
   /// Default: `BorderSide.none`
-  final BorderSide topBorder;
+  final BorderSide topBorder = BorderSide.none,
 
   /// Default: `BorderSide(color: CupertinoColors.opaqueSeparator.resolveFrom(context), width: CS_BORDER_WIDTH)`
-  final BorderSide? bottomBorder;
+  final BorderSide? bottomBorder,
 
   /// Default: CupertinoColors.secondarySystemGroupedBackground
-  final Color? backgroundColor;
-
-  const CSWidgetStyle({
-    this.alignment,
-    this.addPaddingToBorder = true,
-    this.topBorder = BorderSide.none,
-    this.bottomBorder,
-    this.backgroundColor,
-    this.icon,
-  });
-
-  factory CSWidgetStyle.fallback(BuildContext context) => CSWidgetStyle(
-        backgroundColor: CupertinoColors.secondarySystemGroupedBackground
-            .resolveFrom(context),
-        bottomBorder: kCupertinoBorderSide(context),
-      );
-
-  // TODO add factory constructor for first, middle, last
+  final Color? backgroundColor,
+  final Icon? icon,
+}) with Diagnosticable {
+  factory fallback(BuildContext context) => CSWidgetStyle(
+    backgroundColor: CupertinoColors.secondarySystemGroupedBackground
+        .resolveFrom(context),
+    bottomBorder: kCupertinoBorderSide(context),
+  );
 
   CSWidgetStyle merge(CSWidgetStyle? other) {
     if (other == null) {
