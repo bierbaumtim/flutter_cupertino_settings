@@ -9,7 +9,7 @@ class CSControl({
 
   /// The widget displayed at the right side of the widget.
   required final Widget contentWidget,
-  CSWidgetStyle? style,
+  super.style,
 
   /// The fontsize applied to the children.
   final double fontSize = kCSTitleFontsize,
@@ -21,7 +21,6 @@ class CSControl({
           contentWidget: contentWidget,
           nameWidget: nameWidget,
         ),
-        style: style,
       );
 }
 

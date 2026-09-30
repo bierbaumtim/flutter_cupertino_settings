@@ -105,7 +105,7 @@ class const CSLink({
   }
 }
 
-enum CellType {
+enum CellType() {
   /// Default Style with optional widget on left side and left-aligned title
   defaultStyle,
 
