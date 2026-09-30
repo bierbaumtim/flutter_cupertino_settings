@@ -1,27 +1,25 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
-class MyApp extends StatelessWidget {
+class const MyApp() extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp(
-      theme: const CupertinoThemeData(
-        brightness: Brightness.dark,
-      ),
+    return const CupertinoApp(
+      theme: CupertinoThemeData(brightness: Brightness.dark),
       home: HomeScreen(),
     );
   }
 }
 
-class HomeScreen extends StatefulWidget {
+class const HomeScreen() extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState() extends State<HomeScreen> {
   double _slider = 0.5;
   bool _switch = false;
   int _index = 0;
@@ -40,18 +38,15 @@ class _HomeScreenState extends State<HomeScreen> {
               value: _slider,
               onChanged: (double value) => setState(() => _slider = value),
             ),
-            style: CSWidgetStyle(
-              icon: Icon(CupertinoIcons.sun_max),
-              addPaddingToBorder: true,
-            ),
+            style: const CSWidgetStyle(icon: Icon(CupertinoIcons.sun_max)),
           ),
           CSControl(
-            nameWidget: Text('Auto brightness'),
+            nameWidget: const Text('Auto brightness'),
             contentWidget: CupertinoSwitch(
               value: _switch,
               onChanged: (bool value) => setState(() => _switch = value),
             ),
-            style: CSWidgetStyle(
+            style: const CSWidgetStyle(
               icon: Icon(CupertinoIcons.sun_max),
               addPaddingToBorder: false,
             ),
@@ -70,21 +65,20 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const CSHeader(""),
           CSControl(
-            nameWidget: Text('Loading...'),
+            nameWidget: const Text('Loading...'),
             contentWidget: const CupertinoActivityIndicator(),
           ),
           CSButton(
-            child: Text("Licenses"),
             pressed: () {
               print("It works!");
             },
-            buttonType: CSButtonType.defaultStyle
+            child: const Text("Licenses"),
           ),
           const CSHeader(""),
           CSButton(
-            child: Text("Delete all data"),
             pressed: () {},
             buttonType: CSButtonType.destructiveStyle,
+            child: const Text("Delete all data"),
           ),
         ],
       ),
